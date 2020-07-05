@@ -132,10 +132,10 @@ function itemCheck() {
             // }
         ])
             .then(function (answer) {
-                
+
                 for (var i = 0; i < results.length; i++) {
-                    
-                
+
+
                     if (results[i].item_id === answer.choice && results[i].stock_quantity < answer.iQuant) {
                         answerIqaunt = answer.iQuant;
                         chosenItem = results[i].item_id;
@@ -143,45 +143,45 @@ function itemCheck() {
                         console.log("You selected  " + chosenItem);
                         // var qChosenItem = JSON.stringify(results[i]);
                         qChosenItem = results[i].stock_quantity;
-                        
+
                         console.log("Quantity  " + qChosenItem);
                         // itemQuantity();
                         console.log("Insufficient quanity. There is only " + qChosenItem + "." + "You selected " + answer.iQuant + ".")
-                        end.connection()
+                      
                     }
-                   else if (results[i].item_id === answer.choice && results[i].stock_quantity > answer.iQuant) {
-                    answerIqaunt = answer.iQuant;
+                    else if (results[i].item_id === answer.choice && results[i].stock_quantity > answer.iQuant) {
+                        answerIqaunt = answer.iQuant;
 
                         chosenItem = results[i].item_id;
                         qChosenItem = results[i].stock_quantity;
-                       var newProductQuant = qChosenItem - answerIqaunt;
+                        var newProductQuant = qChosenItem - answerIqaunt;
                         connection.query(
-                            
+
                             "UPDATE products SET ? WHERE ?",
                             [
                                 {
                                     stock_quanity: newProductQuant
                                 },
                                 {
-        
+
                                     item_id: chosenItem
                                 }
                             ],
-                            function(err) {
+                            function (err) {
                                 if (err) throw err;
-                                
+
                             }
                         );
                         console.log(chosenItem + " products updated!There are(is) " + newProductQuant + " " + chosenItem + " left.");
                         pChosenItem = results[i].price;
                         var yourTotal = answer.iQuant * pChosenItem;
                         console.log("Your total is $" + yourTotal + ".00" + ".");
-                       
-                    
-                        
+
+
+
                     }
-                    else  {
-                        end.connection()
+                    else {
+                      
                     }
                     // if (results[i].stock_quantity < answer.iQuant) {
                     //     console.log("Insufficient quanity. There is only " + results[i].stock_quantity + "." + "You selected " + answer + ".")
@@ -194,12 +194,12 @@ function itemCheck() {
                 }
 
             });
-          
 
-       
-            
-                
-            
+
+
+
+
+
 
         //  return qChosenItem
 
